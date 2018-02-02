@@ -1,1 +1,1 @@
-# mon-test-brewery
+Brewery API magento 2 module
