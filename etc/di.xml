@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="GuzzleHttp\ClientInterface" type="GuzzleHttp\Client" />
+    <preference for="Lev\Brewery\Api\ApiClientInterface" type="Lev\Brewery\Model\GuzzleApiClient" />
+    <preference for="Lev\Brewery\Api\RequestInterface" type="Lev\Brewery\Model\DataObjectRequest" />
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="get_product_abv_desc" type="Lev\Brewery\Plugin\ProductGet"/>
+    </type>
+</config>
