@@ -28,7 +28,7 @@ class InstallData implements InstallDataInterface
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
         $eavSetup->addAttribute(Product::ENTITY, 'abv', [
-            'type' => 'float',
+            'type' => 'decimal',
             'label' => 'ABV',
             'input' => 'text',
             'required' => false,

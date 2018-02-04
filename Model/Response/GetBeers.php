@@ -57,11 +57,13 @@ class GetBeers extends DataObject implements ResponseInterface
 //                'abv' => $item['abv']
 //            ];
 //            $products[] = $this->productFactory->create()->setData($productData);
-            $products[] = $this->productFactory->create()
+            $product = $this->productFactory->create()
                 ->setSku($item['id'])
-                ->setName($item['name'])
+                ->setName($item['name']);
+            $product->getExtensionAttributes()
                 ->setDescription($item['description'])
                 ->setAbv($item['abv']);
+            $products[] = $product;
         }
 
         $this->setData(self::DATA_PRODUCTS, $products);
