@@ -5,7 +5,15 @@ namespace Lev\Brewery\Exception;
 use Exception;
 use Throwable;
 
-class ApiFailure extends Exception {
+/**
+ * Class ApiFailure
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Exception
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+class ApiFailure extends Exception
+{
     /**
      * @var mixed
      */
@@ -28,7 +36,8 @@ class ApiFailure extends Exception {
     /**
      * @return mixed
      */
-    public function getResponse() {
+    public function getResponse()
+    {
         return $this->response;
     }
 }

@@ -3,7 +3,17 @@
     <preference for="GuzzleHttp\ClientInterface" type="GuzzleHttp\Client" />
     <preference for="Lev\Brewery\Api\ApiClientInterface" type="Lev\Brewery\Model\GuzzleApiClient" />
     <preference for="Lev\Brewery\Api\RequestInterface" type="Lev\Brewery\Model\DataObjectRequest" />
+    <preference for="Lev\Brewery\Api\Import\ProductInterface" type="Lev\Brewery\Model\ProductImport" />
+    <preference for="Lev\Brewery\Api\Request\BuilderInterface" type="Lev\Brewery\Model\Request\Builder" />
+
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_product_abv_desc" type="Lev\Brewery\Plugin\ProductGet"/>
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="import_products" xsi:type="object">Lev\Brewery\Console\Command\ImportProductsCommand</item>
+            </argument>
+        </arguments>
     </type>
 </config>

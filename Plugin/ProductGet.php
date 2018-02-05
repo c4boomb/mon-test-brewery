@@ -8,11 +8,31 @@ use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\ProductFactory;
 
+/**
+ * Class ProductGet
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Plugin
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
 class ProductGet
 {
+    /**
+     * @var ProductExtensionFactory
+     */
     protected $productExtensionFactory;
+
+    /**
+     * @var ProductFactory
+     */
     protected $productFactory;
 
+    /**
+     * ProductGet constructor
+     *
+     * @param ProductExtensionFactory $productExtensionFactory
+     * @param ProductFactory $productFactory
+     */
     public function __construct(
         ProductExtensionFactory $productExtensionFactory,
         ProductFactory $productFactory
@@ -22,6 +42,12 @@ class ProductGet
         $this->productExtensionFactory = $productExtensionFactory;
     }
 
+    /**
+     * @param ProductRepositoryInterface $subject
+     * @param Closure $proceed
+     * @param $customerId
+     * @return ProductInterface
+     */
     public function aroundGetById(
         ProductRepositoryInterface $subject,
         Closure $proceed,

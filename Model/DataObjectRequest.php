@@ -6,8 +6,15 @@ use InvalidArgumentException;
 use Lev\Brewery\Api\RequestInterface;
 use Magento\Framework\DataObject;
 
-class DataObjectRequest extends DataObject implements RequestInterface {
-
+/**
+ * Class DataObjectRequest
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Model
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+class DataObjectRequest extends DataObject implements RequestInterface
+{
     /**
      * Path to data in DataObject
      */
@@ -76,7 +83,8 @@ class DataObjectRequest extends DataObject implements RequestInterface {
      * @param array $params
      * @return string
      */
-    protected function processBindings(string $path, array $params) {
+    protected function processBindings(string $path, array $params)
+    {
         foreach ($params as $key => $value) {
             $path = str_replace(':' . $key, $value, $path);
         }

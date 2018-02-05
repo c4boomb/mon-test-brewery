@@ -2,16 +2,27 @@
 
 namespace Lev\Brewery\Setup;
 
+use Magento\Catalog\Model\Product;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
+use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Eav\Setup\EavSetupFactory;
-use Magento\Catalog\Model\Product;
 
+/**
+ * Class InstallData
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Setup
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
 class InstallData implements InstallDataInterface
 {
+    /**
+     * @var EavSetupFactory
+     */
     private $eavSetupFactory;
+
     /**
      * @param EavSetupFactory $eavSetupFactory
      */
@@ -20,6 +31,10 @@ class InstallData implements InstallDataInterface
         $this->eavSetupFactory = $eavSetupFactory;
     }
 
+    /**
+     * @param ModuleDataSetupInterface $setup
+     * @param ModuleContextInterface $context
+     */
     public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {
         $setup->startSetup();

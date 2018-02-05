@@ -2,8 +2,15 @@
 
 namespace Lev\Brewery\Api;
 
-interface ApiClientInterface {
-
+/**
+ * Interface ApiClientInterface
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Api
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+interface ApiClientInterface
+{
     /**
      * Send request and prepares response
      *

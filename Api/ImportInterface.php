@@ -2,10 +2,19 @@
 
 namespace Lev\Brewery\Api;
 
-interface ImportInterface {
+/**
+ * Interface ImportInterface
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Api
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+interface ImportInterface
+{
     /**
+     * Imports batch of data
+     *
      * @param $data
-     * @return ImportInterface
      */
-    public function import($data) : ImportInterface;
+    public function import($data);
 }

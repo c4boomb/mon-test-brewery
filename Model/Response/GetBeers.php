@@ -6,6 +6,13 @@ use Lev\Brewery\Api\ResponseInterface;
 use Magento\Catalog\Api\Data\ProductInterfaceFactory;
 use Magento\Framework\DataObject;
 
+/**
+ * Class GetBeers
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Model\Response
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
 class GetBeers extends DataObject implements ResponseInterface
 {
     /**
@@ -44,25 +51,27 @@ class GetBeers extends DataObject implements ResponseInterface
         if (!empty($response['data'])) {
             $this->mapProducts($response['data']);
         }
+
+        return $this;
     }
 
-    private function mapProducts(array $items) {
+    /**
+     * Map products to Product model
+     *
+     * @param array $items
+     */
+    private function mapProducts(array $items)
+    {
         $products = [];
 
         foreach ($items as $item) {
-//            $productData = [
-//                'sku' => $item['id'],
-//                'name' => $item['name'],
-//                'description' => $item['description'],
-//                'abv' => $item['abv']
-//            ];
-//            $products[] = $this->productFactory->create()->setData($productData);
             $product = $this->productFactory->create()
                 ->setSku($item['id'])
-                ->setName($item['name']);
+                ->setName($item['name'])
+                ->setPrice(5);
             $product->getExtensionAttributes()
-                ->setDescription($item['description'])
-                ->setAbv($item['abv']);
+                ->setDescription($item['description'] ?? '')
+                ->setAbv($item['abv'] ?? 0.00);
             $products[] = $product;
         }
 
@@ -72,21 +81,24 @@ class GetBeers extends DataObject implements ResponseInterface
     /**
      * @return string
      */
-    public function getCurrentPage() : string {
+    public function getCurrentPage(): string
+    {
         return $this->getData(self::DATA_CURRENT_PAGE);
     }
 
     /**
      * @return string
      */
-    public function getNumberOfPages() : string {
+    public function getNumberOfPages(): string
+    {
         return $this->getData(self::DATA_NUM_OF_PAGES);
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getProducts() : string {
+    public function getProducts(): array
+    {
         return $this->getData(self::DATA_PRODUCTS);
     }
 }

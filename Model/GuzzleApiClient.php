@@ -9,8 +9,18 @@ use Lev\Brewery\Api\ResponseInterface;
 use Lev\Brewery\Exception\ApiFailure;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
-class GuzzleApiClient implements ApiClientInterface {
-
+/**
+ * Class GuzzleApiClient
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Model
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+class GuzzleApiClient implements ApiClientInterface
+{
+    /**
+     * Path to config
+     */
     const XML_PATH_API_URL = 'brew/api/url';
     const XML_PATH_API_KEY = 'brew/api/api_key';
 
@@ -48,37 +58,47 @@ class GuzzleApiClient implements ApiClientInterface {
      */
     public function execute(RequestInterface $request, ResponseInterface &$response)
     {
-        $response = $this->guzzle->request(
+        $query = $request->getQuery();
+        $query['key'] = $this->getApiKey();
+        $guzzleResponse = $this->guzzle->request(
             $request->getMethod(),
             $this->getRequestPath($request),
             [
-                'query' => $request->getQuery()
+                'query' => $query
             ]
         );
 
-        $response = json_decode($response, true);
+        $guzzleResponse = json_decode($guzzleResponse->getBody(), true);
 
-        if ($response['status'] == 'failure') {
-            throw new ApiFailure($response, $response['errorMessage'] ?? '');
+        if ($guzzleResponse['status'] == 'failure') {
+            throw new ApiFailure($guzzleResponse, $guzzleResponse['errorMessage'] ?? '');
         }
 
-        $response->map($response);
+        $response->map($guzzleResponse);
     }
 
-    protected function getRequestPath(RequestInterface $request) : string {
-        $url = sprintf(
-            '%s%s?key=%s',
-            $this->getBaseUrl(),
-            $request->getPath(),
-            $this->getApiKey()
-        );
-    }
-
-    protected function getBaseUrl() : string {
-        return $this->scopeConfig->getValue(self::XML_PATH_API_URL);
-    }
-
-    protected function getApiKey() : string {
+    /**
+     * @return string
+     */
+    protected function getApiKey(): string
+    {
         return $this->scopeConfig->getValue(self::XML_PATH_API_KEY);
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @return string
+     */
+    protected function getRequestPath(RequestInterface $request): string
+    {
+        return $this->getBaseUrl() . $request->getPath();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBaseUrl(): string
+    {
+        return $this->scopeConfig->getValue(self::XML_PATH_API_URL);
     }
 }

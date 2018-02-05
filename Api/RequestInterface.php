@@ -4,7 +4,16 @@ namespace Lev\Brewery\Api;
 
 use InvalidArgumentException;
 
-interface RequestInterface {
+/**
+ * Interface RequestInterface
+ * TODO: Implement request in another way
+ *
+ * @category  Lev
+ * @package   Lev\Brewery\Api
+ * @author    Lev Grigoryev <lev.grigoryev.al@gmail.com>
+ */
+interface RequestInterface
+{
     /**
      * Sets method for request
      *
@@ -12,7 +21,7 @@ interface RequestInterface {
      * @return RequestInterface
      * @throws InvalidArgumentException
      */
-    public function setMethod(string $type) : RequestInterface;
+    public function setMethod(string $type): RequestInterface;
 
     /**
      * Set request data
@@ -20,7 +29,7 @@ interface RequestInterface {
      * @param array $data
      * @return RequestInterface
      */
-    public function setQuery(array $data) : RequestInterface;
+    public function setQuery(array $data): RequestInterface;
 
     /**
      * Set request path
@@ -29,28 +38,26 @@ interface RequestInterface {
      * @param array $params
      * @return RequestInterface
      */
-    public function setPath(string $path, array $params = []) : RequestInterface;
+    public function setPath(string $path, array $params = []): RequestInterface;
 
     /**
      * Get method
      *
      * @return string
      */
-    public function getMethod() : string;
+    public function getMethod(): string;
 
     /**
      * Get data
      *
      * @return array
      */
-    public function getQuery() : array;
+    public function getQuery(): array;
 
     /**
      * Get path
      *
      * @return string
      */
-    public function getPath() : string;
-
-
+    public function getPath(): string;
 }
