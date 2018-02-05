@@ -1,0 +1,27 @@
+{
+  "name": "c4boomb/magento2-brewery",
+  "description": "Brewery API module",
+  "type": "magento2-module",
+  "license": "GPL-3.0-only",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Lev Grigoryev",
+      "email": "lev.grigoryev.al@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "~7.0.24",
+    "magento/framework": "~101.0.0",
+    "magento/module-catalog": "~102.0.2",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Lev\\Brewery\\": ""
+    }
+  }
+}
